@@ -1,0 +1,16 @@
+{
+  "name": "node_osc",
+  "version": "1.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "index.js",
+  "dependencies": {
+    "osc-min": "^0.2.0",
+    "node-osc": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
