@@ -1,4 +1,3 @@
-array=new Array(46);
 list=[
 "http://rss.weather.yahoo.co.jp/rss/days/1400.xml",
 "http://rss.weather.yahoo.co.jp/rss/days/3110.xml",
@@ -58,35 +57,25 @@ setInterval(function(){
   for(var i = 0; i < 47; i++) {
     request(list[i],function (err, response, body) {
       parseString(body, function(err, obj) {
-        var items=obj.rss.channel[0].item;
-        var item =items[0];
-        var item2=item.description[0];
-        var re=new RegExp("-");
-        var item3=re.exec(item2)
-        var item4=item2.toString();    
-        var item5=item4.substring(0,item3.index);    
-        var re1=new RegExp("/");
-        var item6=re1.exec(item2);
-        var item7=item4.substring(item3.index+1,item6.index);
-        var item8=item4.substring(item6.index+1);
-        item7 = item7.replace("℃","");
-        item8 = item8.replace("℃","");
-        array[i]=new Array(3);
-        array[i][0]=item5;
-        array[i][1]=item7;
-        array[i][2]=item8;
-      var weather=array[i][0];
-        weather=weather.toString();
-        weather=weather.substr(0,1);
-      if(weather=="曇"){weather="晴"};
-      array[i][0]=weather;
-      client.send('/test', weather);
-      client.send('/test', item7);
-      client.send('/test', item8);
-      console.log(weather);
-      console.log(item7);
-      console.log(item8);
-    });
+        var contents = obj.rss.channel[0].item[0].description[0]; // 天気と温度
+        var re_hyphen = new RegExp("-");
+        var hyphen_contents = re_hyphen.exec(contents);
+        var temp_contents = contents.toString();
+        var weather = contents.toString().substring(0,hyphen_contents.index);    
+        var re_slash = new RegExp("/");
+        var slash_contents = re_slash.exec(contents);
+        var max_temp = temp_contents.substring(hyphen_contents.index+1, slash_contents.index).replace("℃","");
+        var min_temp = temp_contents.substring(slash_contents.index+1).replace("℃","");
+        weather = weather.toString();
+        weather = weather.substr(0,1);
+        if(weather == "曇") weather = "晴";
+        client.send('/test', weather);
+        client.send('/test', max_temp);
+        client.send('/test', min_temp);
+        console.log(weather);
+        console.log(max_temp);
+        console.log(min_temp);
+      });
     });
   }
 },10000);
