@@ -1,0 +1,2 @@
+# weather_visualization
+nodejsで各県の天気予報を取得し、OpenFrameWorks上で県をクリックするとその県の天気情報をグラフィックに出力する
