@@ -47,7 +47,6 @@ list=[
 "http://rss.weather.yahoo.co.jp/rss/days/8810.xml",
 "http://rss.weather.yahoo.co.jp/rss/days/9110.xml"
 ]
-// 繝｢繧ｸ繝･繝ｼ繝ｫ縺ｮ蜿悶ｊ霎ｼ縺ｿ
 var osc = require('node-osc');
 var OF_PORT = 8000;
 var client = new osc.Client('127.0.0.1', OF_PORT);
